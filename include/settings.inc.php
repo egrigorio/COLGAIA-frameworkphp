@@ -17,9 +17,9 @@ $microtimeref = microtime(true);
 
 # Caminhos absolutos para o directório (dir_site) e url (url_site) do projeto
 # ---------------------------------------
-$arrSETTINGS['dir_site'] = '/Applications/XAMPP/xamppfiles/htdocs/framework.php';
-$arrSETTINGS['url_site'] = 'http://framework.php';
-$arrSETTINGS['encrypt']  = 'çjksFKLSDGJKLSDFÇJKLSDÇL3049T823406891304589134509';
+$arrSETTINGS['dir_site'] = '/Applications/XAMPP/xamppfiles/htdocs/frameworkphp';
+$arrSETTINGS['url_site'] = 'http://localhost/frameworkphp';
+$arrSETTINGS['encrypt']  = 'qraOPMBFEÇD/(/Yha^^Ç#$231312414';
 # ---------------------------------------
 
 # Definições gerais do projeto
