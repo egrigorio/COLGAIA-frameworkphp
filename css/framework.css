@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+	width:990px;
+	margin:0 auto;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+}
+
+/* rodape */
+#rodape {
+	display:block;
+}
+
+#debug_time {
+	display:block;
+	margin:20px 0;
+	padding:10px;
+	background-color:#eee;
+	border:1px solid #ccc;
+	float:left;
+}
+#debug_time span {
+	font-weight:bold;
+}
