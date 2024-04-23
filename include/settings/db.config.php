@@ -7,7 +7,7 @@
 # ---------------------------------------
 
 $arrSETTINGS['hostname'] = 'localhost';
-$arrSETTINGS['database'] = 'hvc_framework_linguas';
+$arrSETTINGS['database'] = 'eng_framework';
 $arrSETTINGS['username'] = 'root';
 $arrSETTINGS['password'] = '';
 ?>

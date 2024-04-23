@@ -1,6 +1,10 @@
 <?php 
 include_once '../include/settings.inc.php'; 
 include_once $arrSETTINGS['dir_site_admin'].'/include/topo_login.inc.php'; 
+
+echo generate_password('admin', 'admin');
+
+
 ?>
 <div id="content">
 LOGIN

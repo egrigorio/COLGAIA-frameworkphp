@@ -42,6 +42,6 @@ include_once $arrSETTINGS['dir_site'].'/include/langs/lang.'.$_SESSION['lingua']
 # ---------------------------------------
 
 if(!isset($info_stats) || $info_stats == 1) {
-	stats();
+	/* stats(); */
 }
 ?>

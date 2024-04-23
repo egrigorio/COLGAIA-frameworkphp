@@ -58,8 +58,10 @@ function trata_nome_ficheiro($filename, $extension, $key_field, $modulo, $lingua
 # ---------------------------------------
 
 function carrega_campo($arr, $k_arr_campos, $v_arr_campos, $inserir = 1, $lingua = 0, $res_dados = NULL) {
-	global $arrSETTINGS;
-
+	
+	global $arrSETTINGS;	
+	
+	
 	if( (isset($arr[$v_arr_campos]['editar_obrigatorio']) && $arr[$v_arr_campos]['editar_obrigatorio'] == 0) || $inserir == 1 ) {
 		$valor = '';
 	} elseif($lingua) {
@@ -89,48 +91,56 @@ function carrega_campo($arr, $k_arr_campos, $v_arr_campos, $inserir = 1, $lingua
 		switch($arr[$v_arr_campos]['tipo']) {
 			case 'hidden': 
 				foreach($arrSETTINGS['idiomas'] as $k => $v) {
-					$valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					if($inserir != 1) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					/* $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]); */
 					echo '<input type="hidden" class="custom-hidden-input form_lingua form_lingua_'.$k.'" id="'.$v_arr_campos.'_'.$k.'" name="'.$v_arr_campos.'_'.$k.'" value="'.( is_array($valor) ? $valor[$k] : '' ).'" />';
 				}
 				break;
 	
 			case 'file': 
-				foreach($arrSETTINGS['idiomas'] as $k => $v) {
+				foreach($arrSETTINGS['idiomas'] as $k => $v) {										
+					if($inserir != 1 && is_array($valor)) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]); 
+					//if($inserir != 1) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
 					echo '<input type="file" class="custom-file-input form_lingua form_lingua_'.$k.'" id="'.$v_arr_campos.'_'.$k.'" name="'.$v_arr_campos.'_'.$k.'" value="'.( is_array($valor) ? $valor[$k] : '' ).'" />';
 				}
 				break;
 	
 			case 'text': 
-				foreach($arrSETTINGS['idiomas'] as $k => $v) {
-					$valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+				foreach($arrSETTINGS['idiomas'] as $k => $v) {					
+					if($inserir != 1) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					/* $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);		 */			
 					echo '<input type="text" class="custom-text-input form_lingua form_lingua_'.$k.'" id="'.$v_arr_campos.'_'.$k.'" name="'.$v_arr_campos.'_'.$k.'" value="'.( is_array($valor) ? $valor[$k] : '' ).'" '.$tamanho.' '.$disable.' />';
 				}
 				break;
 	
 			case 'data': 
 				foreach($arrSETTINGS['idiomas'] as $k => $v) {
-					$valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					if($inserir != 1) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					/* $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]); */
 					echo '<input type="text" class="custom-data-input datepicker form_lingua form_lingua_'.$k.'" id="'.$v_arr_campos.'_'.$k.'" name="'.$v_arr_campos.'_'.$k.'" value="'.( is_array($valor) ? $valor[$k] : '' ).'" '.$tamanho.' '.$disable.' />';
 				}
 				break;
 	
 			case 'cor': 
 				foreach($arrSETTINGS['idiomas'] as $k => $v) {
-					$valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					if($inserir != 1) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					/* $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]); */
 					echo '<input type="text" class="custom-cor-input jscolor form_lingua form_lingua_'.$k.'" id="'.$v_arr_campos.'_'.$k.'" name="'.$v_arr_campos.'_'.$k.'" value="'.( is_array($valor) ? $valor[$k] : '' ).'" '.$tamanho.' '.$disable.' />';
 				}
 				break;
 	
 			case 'textarea': 
 				foreach($arrSETTINGS['idiomas'] as $k => $v) {
-					$valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					if($inserir != 1) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					/* $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]); */
 					echo '<textarea cols="60" rows="5" '.$disable.' class="custom-textarea-input form_lingua form_lingua_'.$k.'" id="'.$v_arr_campos.'_'.$k.'" name="'.$v_arr_campos.'_'.$k.'">'.( is_array($valor) ? $valor[$k] : '' ).'</textarea>';
 				}
 				break;
 
 			case 'ckeditor': 
 				foreach($arrSETTINGS['idiomas'] as $k => $v) {
-					$valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					if($inserir != 1) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					/* $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]); */
 					echo '<input type="text" class="custom-ckeditor-input form_lingua_htmlarea form_lingua_htmlarea_'.$k.'" id="'.$v_arr_campos.'_'.$k.'" rel="'.$v_arr_campos.'" name="'.$v_arr_campos.'_'.$k.'" value="'.( is_array($valor) ? $valor[$k] : '' ).'" />';
 				}
 				echo '<textarea class="custom-ckeditor-input" id="'.$v_arr_campos.'" cols="60" rows="5" '.$disable.' name="'.$v_arr_campos.'">'.( is_array($valor) ? $valor[$_SESSION['lingua']] : '' ).'</textarea>';
@@ -139,13 +149,15 @@ function carrega_campo($arr, $k_arr_campos, $v_arr_campos, $inserir = 1, $lingua
 					
 			case 'password': 
 				foreach($arrSETTINGS['idiomas'] as $k => $v) {
-					$valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					if($inserir != 1) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
+					/* $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]); */
 					echo '<input type="password" class="custom-password-input form_lingua form_lingua_'.$k.'" id="'.$v_arr_campos.'_'.$k.'" name="'.$v_arr_campos.'_'.$k.'" value="'.( is_array($valor) ? $valor[$k] : '' ).'" '.$tamanho.' '.$disable.' />';
 				}
 				break;
 	
 			case 'select':
 				foreach($arrSETTINGS['idiomas'] as $k => $v) {
+					if($inserir != 1) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
 					echo '<select class="custom-select-input form_lingua form_lingua_'.$k.'" id="'.$v_arr_campos.'_'.$k.'" name="'.$v_arr_campos.'_'.$k.'" '.$disable.'>';
 					foreach($arr[$v_arr_campos]['opcoes'] as $k=>$v) {
 						echo '<option value="'.$k.'" '.( ( $inserir && $arr[$v_arr_campos]['default'] == $k ) || ( is_array($valor) ? $valor[$k] : '' ) == $k ? 'selected="selected"' : '' ).'>'.$v.'</option>';
@@ -156,6 +168,7 @@ function carrega_campo($arr, $k_arr_campos, $v_arr_campos, $inserir = 1, $lingua
 	
 			case 'radio':
 				foreach($arrSETTINGS['idiomas'] as $k => $v) {
+					if($inserir != 1) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
 					foreach($arr[$v_arr_campos]['opcoes'] as $k=>$v) {
 						echo '<input type="radio" class="custom-radio-input form_lingua form_lingua_'.$k.'" id="'.$v_arr_campos.'_'.$k.'" name="'.$v_arr_campos.'_'.$k.'" value="'.$k.'" '.( ( $inserir && $arr[$v_arr_campos]['default'] == $k ) || ( is_array($valor) ? $valor[$k] : '' ) == $k ? 'checked="checked"' : '' ).' '.$disable.' />'.$v;
 					}
@@ -166,6 +179,7 @@ function carrega_campo($arr, $k_arr_campos, $v_arr_campos, $inserir = 1, $lingua
 				// resolver um problema se este campo for de idiomas, com o valor que recebe no editar
 				$arrCheckbox = explode(',', $valor);
 				foreach($arrSETTINGS['idiomas'] as $k => $v) {
+					if($inserir != 1) $valor[$k] = (!isset($valor[$k]) ? '' : $valor[$k]);
 					foreach($arr[$v_arr_campos]['opcoes'] as $k=>$v) {
 						echo '<input type="checkbox" class="custom-checkbox-input form_lingua form_lingua_'.$k.'" id="'.$v_arr_campos.'_'.$k.'" name="'.$v_arr_campos.'_'.$k.'[]" value="'.$k.'" '.( ( $inserir && $arr[$v_arr_campos]['default'] == $k ) || in_array($k, $arrCheckbox) ? 'checked="checked"' : '' ).' '.$disable.' />'.$v;
 					}
@@ -569,21 +583,22 @@ function db_do_insert_form($arr) {
 	$arr_campos = array();
 	$arr_campos_chave = array();
 	$arr_campos_linguas = array();
-		
+	
 	foreach($arr as $k=>$v) {
 		if( (isset($v['inserir']) && $v['inserir'] == 1) && (isset($v['campo']) && $v['campo'] == 1) && !(isset($v['lingua']) && $v['lingua'] == 1) ) {
-			$arr_campos[$v['inserir_ordem']] = $k;
+			$arr_campos[$v['inserir_ordem']] = $k;	
 		}
 		if( (isset($v['chave']) && $v['chave'] == 1) && (isset($v['campo']) && $v['campo'] == 1) ) {
 			$arr_campos_chave[] = $k;
 		}
 		if( (isset($v['inserir']) && $v['inserir'] == 1) && (isset($v['campo']) && $v['campo'] == 1) && (isset($v['lingua']) && $v['lingua'] == 1) ) {
 			$arr_campos_linguas[] = $k;
-			/*foreach($arrSETTINGS['idiomas'] as $k_idioma => $v_idioma) {
-				$arr_campos_linguas[] = $k.'_'.$k_idioma;
-			}*/
+			foreach($arrSETTINGS['idiomas'] as $k_idioma => $v_idioma) {
+				$arr_campos_linguas[] = $k.'_'.$k_idioma;				
+			}
 		}
 	}
+				
 	ksort($arr_campos);
 
 	// ---------------------------------------	
@@ -598,18 +613,22 @@ function db_do_insert_form($arr) {
 		if(isset($v['inserir_unico']) && $v['inserir_unico'] == 1 && isset($v['campo']) && $v['campo'] == 1) {
 			$query_1 .= "$k, ";
 			$query_2 .= "$k = '".$_POST[$k]."' AND ";
-		}
-	}
+		} 
+	}		
 	$query_1 = substr($query_1, 0, strlen($query_1)-2);
 	$query_2 = substr($query_2, 0, strlen($query_2)-5);
 	
-	$query = "SELECT ".$query_1." FROM ".$arr['tabela']['tabela_nome']." WHERE ".$query_2;
-	$res = db_query($query);
-
-	if(is_array($res) && count($res) > 0) {
-		header("Location: index.php?erro=1&campos=".$query_1); # melhorar a mensagem de erro para duplicados
-		exit;
-	}
+	if($query_1 != '' && $query_2 != '') {
+		$query = "SELECT ".$query_1." FROM ".$arr['tabela']['tabela_nome']." WHERE ".$query_2;	
+		$res = db_query($query);
+		if(is_array($res) && count($res) > 0) {
+			header("Location: index.php?erro=1&campos=".$query_1); # melhorar a mensagem de erro para duplicados
+			exit;
+		}
+	}			
+	
+	
+	
 	// ---------------------------------------	
 
 
@@ -620,6 +639,7 @@ function db_do_insert_form($arr) {
 	// ---------------------------------------
 	$query_1 = '';
 	$query_2 = '';
+	
 	
 	foreach($arr_campos as $k=>$v) {
 		$query_1 .= "$v, ";
@@ -658,6 +678,8 @@ function db_do_insert_form($arr) {
 	// no INSERT vamos incluir todos os campos assinalados como inserir => 1
 	// ---------------------------------------
 	$query = "INSERT INTO ".$arr['tabela']['tabela_nome']." (".$query_1.") VALUES (".$query_2.")";
+	echo $query;
+	
 	$res = db_query($query);
 	$key_value = $res;
 	$key_field = 'id='.$res;
@@ -673,34 +695,37 @@ function db_do_insert_form($arr) {
 			$query_2 = '';
 			
 			foreach($arr_campos_linguas as $k=>$v) {
-				$query_1 .= "$v, ";
 				
-				if($arr[$v]['tipo'] == 'file') {
-					$query_2 .= "'', ";
-		
-				} elseif($arr[$v]['tipo'] == 'checkbox') {
-					$valor = '';
-					if(isset($_POST[$v.'_'.$k_idioma])) {
-						foreach($_POST[$v.'_'.$k_idioma] as $k_checkbox=> $v_checkbox) {
-							$valor .= $v_checkbox.',';
+				if(isset($arr[$v])) {
+					$query_1 .= "$v, ";
+
+					if($arr[$v]['tipo'] == 'file') {
+						$query_2 .= "'', ";		
+					} elseif($arr[$v]['tipo'] == 'checkbox') {
+						$valor = '';
+						if(isset($_POST[$v.'_'.$k_idioma])) {
+							foreach($_POST[$v.'_'.$k_idioma] as $k_checkbox=> $v_checkbox) {
+								$valor .= $v_checkbox.',';
+							}
+							$valor = substr($valor, 0, strlen($valor)-1);
+						} else {
+							$valor = 0;
 						}
-						$valor = substr($valor, 0, strlen($valor)-1);
+						$query_2 .= "'".$valor."', ";
+						
+					} elseif(isset($arr[$v]['inserir_funcao'])) {
+						$param = array();
+						foreach($arr[$v]['inserir_funcao']['funcao_parametros'] as $k_funcao=> $v_funcao) {
+							$param[]= $_POST[$v_funcao]; /* ver isto nos idiomas */
+						}
+						$valor = call_user_func_array($arr[$v]['inserir_funcao']['funcao_nome'],$param);
+						$query_2 .= "'".$valor."', ";
+						
 					} else {
-						$valor = 0;
+						$query_2 .= "'".$_POST[$v.'_'.$k_idioma]."', ";
 					}
-					$query_2 .= "'".$valor."', ";
-					
-				} elseif(isset($arr[$v]['inserir_funcao'])) {
-					$param = array();
-					foreach($arr[$v]['inserir_funcao']['funcao_parametros'] as $k_funcao=> $v_funcao) {
-						$param[]= $_POST[$v_funcao]; /* ver isto nos idiomas */
-					}
-					$valor = call_user_func_array($arr[$v]['inserir_funcao']['funcao_nome'],$param);
-					$query_2 .= "'".$valor."', ";
-					
-				} else {
-					$query_2 .= "'".$_POST[$v.'_'.$k_idioma]."', ";
 				}
+				
 			}
 			$query_1 = substr($query_1, 0, strlen($query_1)-2);
 			$query_2 = substr($query_2, 0, strlen($query_2)-2);
@@ -717,6 +742,7 @@ function db_do_insert_form($arr) {
 	// tratar campos de imagem, vamos utilizar o ID do insert para gravar no nome da foto
 	// ---------------------------------------
 
+	
 	if(count($_FILES)) {
 		$existe_campos_lingua = count($arr_campos_linguas);
 		
@@ -802,7 +828,7 @@ function db_do_insert_form($arr) {
 # ---------------------------------------
 
 function db_do_edit_form($arr) {
-	global $arrSETTINGS;
+	global $arrSETTINGS;		
 	
 	// ---------------------------------------	
 	// determinar os campos para edição
@@ -955,9 +981,9 @@ function db_do_edit_form($arr) {
 	// tratar campos de imagem, vamos utilizar o ID do insert para gravar no nome da foto
 	// ---------------------------------------
 
+	
 	if(count($_FILES)) {
 		$existe_campos_lingua = count($arr_campos_linguas);
-		
 		# preparar as strings, para usar na query
 		$query_1 = '';
 		$query_2 = '';
@@ -996,7 +1022,7 @@ function db_do_edit_form($arr) {
 			// ---------------------------------------	
 			// tratar campos de linguas, vamos utilizar o ID do insert para gravar na tabela de idiomas
 			// ---------------------------------------
-			if($existe_campos_lingua) {
+			if($existe_campos_lingua) {				
 				foreach($arrSETTINGS['idiomas'] as $k_idioma => $v_idioma) {
 					$k_temp = str_replace('_'.$k_idioma, '', $k);
 					if(in_array($k_temp, $arr_campos_linguas)) {

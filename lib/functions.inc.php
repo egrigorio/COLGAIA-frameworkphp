@@ -24,7 +24,7 @@ function data_extenso($dia_semana = 0, $data = NULL) {
 	return $str;
 }
 
-function stats() {
+/* function stats() {
 	$url = $_SERVER['REQUEST_URI'];
 	$ip = $_SERVER['REMOTE_ADDR'];
 	$sessao = session_id();
@@ -33,7 +33,7 @@ function stats() {
 	
 	$query = "INSERT INTO stats (url, ip, sessao, data, id_user) VALUES ('$url', '$ip','$sessao','$data','$id_user')";
 	$res = db_query($query);
-}
+} */
 
 function callback($interno = 0) {
 	global $arrSETTINGS;

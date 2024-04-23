@@ -23,6 +23,8 @@ switch($task) {
 		break;
 
 	case 'do_insert': 
+		
+		pr($_POST);
 		db_do_insert_form($arrForm);
 		break;
 
